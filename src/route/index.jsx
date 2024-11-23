@@ -36,7 +36,9 @@ const router = createBrowserRouter([
       {
         path : "verification-otp",
         element : <OtpVerification/>
-      }
+      },
+     
+        
         ],
   },
 ]);
