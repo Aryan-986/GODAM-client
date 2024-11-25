@@ -44,6 +44,8 @@ const Login = () => {
 
             if(response.data.success){
                 toast.success(response.data.message)
+                localStorage.setItem('accessToken',response.data.data.accesstoken)
+                localStorage.setItem('refreshToken',response.data.data.refreshtoken)
                 setData({
                     email : "",
                     password : "",
@@ -104,7 +106,7 @@ const Login = () => {
                         <Link to={"/forgot-password"} className='block ml-auto hover:text-blue-700'>Forgot Password?</Link>
                     </div>
 
-                    <button disabled={!valideValue} className={` ${valideValue ? "bg-green-800 hover:bg-green-700" : "bg-gray-500" }    text-white py-2 rounded font-semibold my-3 tracking-wide`}>LogIn</button>
+                    <button disabled={!valideValue} className={` ${valideValue ? "bg-black hover:bg-gray-700" : "bg-gray-500" }    text-white py-2 rounded font-semibold my-3 tracking-wide`}>LogIn</button>
 
                 </form>
 

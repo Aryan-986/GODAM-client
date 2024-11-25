@@ -67,7 +67,37 @@ const Register = () => {
             AxiosToastError(error)
         }
 
+        const handleSubmit = async(e)=>{
+        e.preventDefault()
 
+        try {
+            const response = await Axios({
+                ...SummaryApi.forgot_password,
+                data : data
+            })
+            
+            if(response.data.error){
+                toast.error(response.data.message)
+            }
+
+            if(response.data.success){
+                toast.success(response.data.message)
+                navigate("/verification-otp",{
+                  state : data
+                })
+                setData({
+                    email : "",
+                })
+                
+            }
+
+        } catch (error) {
+            AxiosToastError(error)
+        }
+
+
+
+    }
 
     }
     return (
