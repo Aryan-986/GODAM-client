@@ -18,8 +18,12 @@ const SummaryApi = {
         method : "put"   
     },
     resetPassword : {
-        url : "http://localhost:8080/api/user/reset-password",
+        url : "/api/user/reset-password",
         method : "put"
+    },
+    refreshToken : {
+        url : "/api/user/refresh-token",
+        method : "post"
     }
 }
 
