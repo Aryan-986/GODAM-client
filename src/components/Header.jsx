@@ -1,16 +1,24 @@
-
 import { Link, useLocation,useNavigate } from 'react-router-dom';
 import logo from '../assets/godam logo.svg'
 import Search from './Search';
 import { FaUserAlt } from "react-icons/fa";
 import useMobile from '../hooks/useMobile';
 import { TiShoppingCart } from "react-icons/ti";
+import { useSelector } from 'react-redux';
+import { GoTriangleDown } from "react-icons/go";
+import { GoTriangleUp } from 'react-icons/go';
+import { useState } from 'react';
+import UserMenu from './UserMenu';
 
 const Header = () => {
   const [ isMobile ] = useMobile()
     const location = useLocation()
     const isSearchPage = location.pathname === "/search"
     const navigate = useNavigate()
+    const user = useSelector((state)=> state?.user)
+    const [openUserMenu,setOpenUserMenu] = useState(false)  
+
+    console.log('user from store', user)
 
     const redirectToLoginPage = ()=>{
         navigate("/login")
@@ -57,7 +65,24 @@ const Header = () => {
 
                   {/**Dextop */}
                   <div className='hidden lg:flex items-center gap-5'>
-                      <button onClick={redirectToLoginPage} className='text-lg px-2' > Login </button>
+                    {
+                      user?._id ? (
+                        <div className='relative'>
+                          <div className='flex items-center gap-2'>
+                            <p>Account</p>
+                            <GoTriangleDown />
+                           {/*<GoTriangleUp/>*/}              
+                            </div>
+                            <div className='absolute right-0 top-12'>
+                            <div className='bg-white rounded p-4 min-w-52 lg:shadow-lg'>
+                              <UserMenu/>
+                            </div>
+                            </div>
+                        </div>
+                      ) : (
+                        <button onClick={redirectToLoginPage} className='text-lg px-2' > Login </button>
+                      )
+                    }
                       <button className='flex items-center gap-2 bg-black hover: px-3 py-3 rounded text-white'>
                         {/**add to card icons */}
                         <div className = 'animate-bounce'>
