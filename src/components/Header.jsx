@@ -68,16 +68,28 @@ const Header = () => {
                     {
                       user?._id ? (
                         <div className='relative'>
-                          <div className='flex items-center gap-2'>
+                          <div onClick={()=>setOpenUserMenu (preve => !preve)} className='flex select-none items-center gap-2 cursor-pointer'>
                             <p>Account</p>
-                            <GoTriangleDown />
-                           {/*<GoTriangleUp/>*/}              
+                            {
+                              openUserMenu ? (
+                                  <GoTriangleUp size={26}/>
+                              ) : (
+                                <GoTriangleDown size={26} />
+                              )
+                            }
+                            
+                                      
                             </div>
-                            <div className='absolute right-0 top-12'>
+                            {
+                              openUserMenu && (
+                                <div className='absolute right-0 top-12'>
                             <div className='bg-white rounded p-4 min-w-52 lg:shadow-lg'>
                               <UserMenu/>
                             </div>
                             </div>
+                              )
+                            }
+                            
                         </div>
                       ) : (
                         <button onClick={redirectToLoginPage} className='text-lg px-2' > Login </button>
